@@ -7,34 +7,11 @@ const bodyparser=require('body-parser');
 const cors=require('cors');
 const mongoose=require('mongoose');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 
 const StudentRoute=require('./routes/StudentRoute');
 
 var app = express();
 
-
-const database={
-  users:[
-      {
-    id: '123',
-    name: "john",
-    email: 'john@gmail.com',
-    entries:0,
-    password: 'bananas',
-    joined: new Date()
-  },
-    {
-      id: '321',
-      name: "nanny",
-      email: 'nanny@gmail.com',
-      entries:0,
-      password: 'apple',
-      joined: new Date()
-    }
-]
-}
 // view engine setup
 
 
@@ -57,13 +34,13 @@ mongoose.connect('mongodb://localhost:27017/SclDatabase', {
   useUnifiedTopology:true,
   useFindAndModify:false,
   useCreateIndex:true
-}).then(()=>{
-  app.listen(3000,()=>{
-    console.log('Running Student Server')
-  })
-    }
-  );
 
+
+}).then(()=>{
+  app.listen(3001,()=>{
+    console.log('Running Student Server',"port:",3001)
+  })
+    });
 
 app.use('/api/v1/studentRoute',StudentRoute);
 
@@ -175,8 +152,8 @@ app.use(function(err, req, res, next) {
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
-  res.status(err.status || 500);
   res.render('error');
+  res.status(err.status || 500);
 });
 
 module.exports = app;
