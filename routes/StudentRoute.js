@@ -6,6 +6,7 @@ const router =express.Router();
 
 router.post('/registerUser',AdminUserController.registerUser);
 router.get('/loginUser',AdminUserController.loginUser);
+router.get('/verifyToken',AdminUserController.verifyToken);
 
 router.post('/saveNews',NewsAndEventController.saveNews);
 router.get('/getNews',NewsAndEventController.getNews);
