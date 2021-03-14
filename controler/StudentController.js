@@ -165,7 +165,6 @@ const saveStudent = (req,res) =>{
 };
 const getMarks = (req,res) => {
     reqOfother=req.headers.term
-    console.log(reqOfother);
    try {
        schemaController().find().then(result=>{
             res.status(200).json({dataSet: result});

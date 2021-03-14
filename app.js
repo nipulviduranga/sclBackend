@@ -6,7 +6,7 @@ var logger = require('morgan');
 const bodyparser=require('body-parser');
 const cors=require('cors');
 const mongoose=require('mongoose');
-
+require('dotenv').config();
 
 const StudentRoute=require('./routes/StudentRoute');
 

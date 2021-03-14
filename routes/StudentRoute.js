@@ -1,7 +1,16 @@
 const StudentControl=require('../controler/StudentController');
 var express = require('express');
-
+const AdminUserController = require('../controler/AdminUserController');
+const NewsAndEventController = require('../controler/News&EventController')
 const router =express.Router();
+
+router.post('/registerUser',AdminUserController.registerUser);
+router.get('/loginUser',AdminUserController.loginUser);
+
+router.post('/saveNews',NewsAndEventController.saveNews);
+router.get('/getNews',NewsAndEventController.getNews);
+router.delete('/deleteNews',NewsAndEventController.deleteNews);
+router.put('/updateNews',NewsAndEventController.updateNews);
 
 router.post('/saveStudentGrade06Term1',StudentControl.saveStudent);
 router.get('/MarksGrade06Term1',StudentControl.getMarks);
