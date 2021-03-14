@@ -56,5 +56,31 @@ const loginUser = (req,res)=>{
         res.status(200).json({message:'Faild!'})
     }
 }
+const verifyToken=(req,res)=>{
+    try{
+        const token = req.headers.token? req.headers.token:'empty';
+        if(token==='empty'){
+            res.status(401).json({message:'UnAuthorized Request Detected!'});
+            return;
+        }
+        const isValid = new Promise((resolve,reject)=>{
+           jwt.verify(token,process.env.JWT_ACCOUNT,(error,decoded)=>{
+             if(error){
+                 reject(false);
+             }
+             if(decoded){
+                 resolve(true);
+             }
+           });
+        });
+        isValid.then(reult=>{
+            res.status(200).json({state:true,message:'Success'});
+        }).catch(err=>{
+            res.status(200).json({state:true,message:'UnAuthorized Request Detected!'});
+        });
+    }catch (e) {
+        res.status(500).json({message:e});
+    }
+}
 
 module.exports = {registerUser,loginUser};
