@@ -56,7 +56,7 @@ const loginUser = (req,res)=>{
         res.status(200).json({message:'Faild!'})
     }
 }
-const verifyToken=(req,res)=>{
+const verifyToken = (req,res)=>{
     try{
         const token = req.headers.token? req.headers.token:'empty';
         if(token==='empty'){
@@ -83,4 +83,4 @@ const verifyToken=(req,res)=>{
     }
 }
 
-module.exports = {registerUser,loginUser};
+module.exports = {registerUser,loginUser,verifyToken};
