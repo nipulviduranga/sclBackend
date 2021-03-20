@@ -27,9 +27,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 const port = process.env.PORT || 3001;
-const db = 'mongodb+srv://admin:12345@scldatabase.usihe.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const MONGODB_URI = 'mongodb+srv://admin:12345@scldatabase.usihe.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const uri=process.env.MONGODB_URI
 
-mongoose.connect(db, {
+mongoose.connect(uri, {
   useNewUrlParser:true,
   useUnifiedTopology:true,
   useFindAndModify:false,
