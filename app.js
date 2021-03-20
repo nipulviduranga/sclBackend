@@ -26,21 +26,25 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+const port = process.env.PORT || 3001;
+const db = 'mongodb+srv://admin:12345@scldatabase.usihe.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
-
-
-mongoose.connect('mongodb://localhost:27017/SclDatabase', {
+mongoose.connect(db, {
   useNewUrlParser:true,
   useUnifiedTopology:true,
   useFindAndModify:false,
   useCreateIndex:true
+}).then(result=>{
+  console.log('Database Connected!');
+}).catch(err=>{
+  console.log('Database connecting Fail!');
+  console.log(err);
+});
 
+app.listen(port,()=>{
+    console.log('Running Student Server',"port:",port)
+  });
 
-}).then(()=>{
-  app.listen(3001,()=>{
-    console.log('Running Student Server',"port:",3001)
-  })
-    });
 
 app.use('/api/v1/studentRoute',StudentRoute);
 
