@@ -24,7 +24,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+var cors_proxy = require('cors-anywhere');
 
+var host = process.env.HOST || '0.0.0.0';
 const port = process.env.PORT || 3001;
 const MONGODB_URI = 'mongodb+srv://admin:12345@scldatabase.usihe.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 const uri=process.env.MONGODB_URI
@@ -40,9 +42,13 @@ mongoose.connect(uri, {
   console.log('Database connecting Fail!');
   console.log(err);
 });
+cors_proxy.createServer({
+  originWhitelist: [], // Allow all origins
+  requireHeader: ['origin', 'x-requested-with'],
+  removeHeaders: ['cookie', 'cookie2']});
 
-app.listen(port,()=>{
-    console.log('Running Student Server',"port:",port)
+app.listen(port,host,()=>{
+    console.log('Running Student Server',"port:",port,"Host:",host)
   });
 
 
