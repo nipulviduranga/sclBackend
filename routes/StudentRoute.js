@@ -2,11 +2,16 @@ const StudentControl=require('../controler/StudentController');
 var express = require('express');
 const AdminUserController = require('../controler/AdminUserController');
 const NewsAndEventController = require('../controler/News&EventController')
+const PapersAndLessons = require('../controler/Papers&LessonsController')
 const router =express.Router();
 
 router.post('/registerUser',AdminUserController.registerUser);
 router.get('/loginUser',AdminUserController.loginUser);
 router.get('/verifyToken',AdminUserController.verifyToken);
+
+router.post('/savePapersAndLessons',PapersAndLessons.saveData);
+router.get('/getPapersAndLessons',PapersAndLessons.getData);
+router.delete('/deletePapersAndLessons',PapersAndLessons.deleteData);
 
 router.post('/saveNews',NewsAndEventController.saveNews);
 router.get('/getNews',NewsAndEventController.getNews);
@@ -252,6 +257,7 @@ router.post('/saveStudentGrade13BioTerm3',StudentControl.saveStudent);
 router.get('/MarksGrade13BioTerm3',StudentControl.getMarks);
 router.delete('/deleteStudentGrade13BioTerm3',StudentControl.deleteStudent);
 router.put('/updateStudentGrade13BioTerm3',StudentControl.updateStudent);
+
 
 
 

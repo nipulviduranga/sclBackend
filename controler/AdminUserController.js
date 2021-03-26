@@ -58,7 +58,7 @@ const loginUser = (req,res)=>{
 }
 const verifyToken = (req,res)=>{
     try{
-        const token = req.headers.token? req.headers.token:'empty';
+        const token = req.headers.token ? req.headers.token:'empty';
         if(token==='empty'){
             res.status(401).json({message:'UnAuthorized Request Detected!'});
             return;
@@ -81,6 +81,17 @@ const verifyToken = (req,res)=>{
     }catch (e) {
         res.status(500).json({message:e});
     }
+
+/*const logOut=(req,res)=>{
+    new Promise((resolve,reject)=>{
+       req.session!.destroy((ree:Error)=>{
+           if(err) {
+               res.status(500).json({message:'error'});
+           }
+           res.clearCookie('tokenData')
+            resolve()
+        })
+    });*/
 }
 
 module.exports = {registerUser,loginUser,verifyToken};

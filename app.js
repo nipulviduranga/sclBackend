@@ -14,7 +14,7 @@ var app = express();
 
 // view engine setup
 
-app.use(function (req, res, next) {
+/*app.use(function (req, res, next) {
 
   // Website you wish to allow to connect
   res.setHeader('Access-Control-Allow-Origin', 'https://nipulviduranga.github.io');
@@ -31,7 +31,7 @@ app.use(function (req, res, next) {
 
   // Pass to next layer of middleware
   next();
-});
+});*/
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.use(bodyparser.json());
@@ -41,10 +41,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors());
 
 const port = process.env.PORT || 3001;
-const MONGODB_URI = 'mongodb+srv://admin:12345@scldatabase.usihe.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
-const uri=process.env.MONGODB_URI
+
+const uri="mongodb://127.0.0.1:27017/SclDatabase";
+/*const MONGODB_URI = 'mongodb+srv://admin:12345@scldatabase.usihe.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const uri=process.env.MONGODB_URI*/
 
 mongoose.connect(uri, {
   useNewUrlParser:true,
